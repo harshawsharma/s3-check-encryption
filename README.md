@@ -1,4 +1,4 @@
-## s3-enforce-encryption
+## s3-check-encryption
 
 A lambda function that emails using SNS of the list of buckets that do not have the default bucket level encryption turned on. 
 
