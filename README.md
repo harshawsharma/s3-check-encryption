@@ -3,7 +3,7 @@
 A lambda function that emails using SNS of the list of buckets that do not have the default bucket level encryption turned on. 
 
 ### Prerequisites
-- At the time of writing this, boto3 on lambda by default didnt seem to be updated to the latest version, which has the required get_bucket_encryption functionality. Kindly package boto3 manually and upload with the code. 
+- At the time of writing this, boto3 on lambda by default [didnt](https://github.com/boto/boto3/issues/1340) seem to be updated to the latest version, which has the required get_bucket_encryption functionality. Kindly package boto3 manually and upload with the code. 
 
 - Setup an SNS topic with a verified email address before running the SAM template. Keep the topic name and arn handy.
 
