@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+    BucketName:
+        Type: String
+    CodeKey:
+        Type: String
+    SNSTopicName:
+        Type: String
+    SNSTopicARN:
+        Type: String
+
+
+    
+Resources:
+    s3bucketencrptyion:
+      Type: 'AWS::Serverless::Function'
+      Properties:
+            Handler: lambda_function.lambda_handler
+            Runtime: python2.7
+            CodeUri:
+              Bucket: !Ref BucketName
+              Key: !Ref CodeKey
+            Policies:
+              - SNSPublishMessagePolicy:
+                  TopicName: !Ref SNSTopicName
+              - S3ReadPolicy:
+                  BucketName: '*'
+              - Version: '2012-10-17' # S3 GetEncryption Policy Document
+                Statement:
+                  - Effect: Allow
+                    Action:
+                      - s3:GetEncryptionConfiguration
+                    Resource: '*'
+            Environment:
+              Variables:
+                SNS_ARN: !Ref SNSTopicARN
+
